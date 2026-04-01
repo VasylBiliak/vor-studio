@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="css/styles.css" />
+<title>VOR – Concept Wear & Streetstyle</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<style>
+  /* Невелика правка, щоб нові шрифти застосувалися негайно */
+  :root {
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+  }
+  body { font-family: var(--font-secondary); }
+  h1, h2, h3, .logo, .hero-title { font-family: var(--font-primary); }
+</style>
+</head>
+<body>
+
+<div class="ann">ПРИВІТАЛЬНИЙ БОНУС: БЕЗКОШТОВНА ДОСТАВКА ВІД 250 ЄВРО</div>
+
+<header>
+  <div class="htop">
+    <button class="logo" onclick="goHome()">VOR<span>WEAR</span></button>
+    <button class="burger" id="burgerBtn"><span></span><span></span><span></span></button>
+    <div class="hright">
+      <button class="lang-btn">UA</button>
+      <button class="cart-btn" id="cartToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+  <nav>
+    <div class="nav-inner">
+      <button class="sale" onclick="goHome()">Special Offers</button>
+      <button onclick="goHome()">НОВИНКИ</button>
+      <button onclick="goHome()">БАЗА</button>
+      <button onclick="goHome()">BESTSELLERS</button>
+      <button onclick="goHome()">Limited Edition</button>
+      <button onclick="goHome()">Колаборації</button>
+      <button onclick="goHome()">Street Culture</button>
+      <button onclick="goHome()">Пальта та куртки</button>
+      <button onclick="goHome()">Трикотаж</button>
+      <button onclick="goHome()">Штани</button>
+      <button onclick="goHome()">Худі</button>
+      <button onclick="goHome()">Світшоти</button>
+      <button onclick="goHome()">Longsleeves</button>
+      <button onclick="goHome()">T-shirts</button>
+      <button onclick="goHome()">Головні убори</button>
+      <button onclick="goHome()">Accessories</button>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <button class="sale" onclick="goHome();closeMobile()">Sale %</button>
+  <button onclick="goHome();closeMobile()">Худі</button>
+  <button onclick="goHome();closeMobile()">Футболки</button>
+  <button onclick="goHome();closeMobile()">Лонгсліви</button>
+  <button onclick="goHome();closeMobile()">Світшоти</button>
+  <button onclick="goHome();closeMobile()">Аксесуари</button>
+  <button onclick="goHome();closeMobile()">Трикотаж</button>
+  <button onclick="goHome();closeMobile()">Нижній одяг</button>
+  <button onclick="goHome();closeMobile()">Куртки</button>
+  <button onclick="goHome();closeMobile()">Класика</button>
+  <button onclick="goHome();closeMobile()">Популярне</button>
+</div>
+
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <p class="hero-tag">Естетика сезону 2026</p>
+      <h1 class="hero-title">VOR<br><em>STUDIO</em></h1>
+      <p class="hero-sub">Ексклюзивний онлайн-шоп — Спроектовано в Україні</p>
+      <button class="hero-cta" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
+        ПЕРЕГЛЯНУТИ КАТАЛОГ
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="section" id="products-section">
+    <div class="section-header">
+      <h2 class="section-title">Свіжі релізи</h2>
+      <button class="all-link">Всі позиції →</button>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="load-more-wrap">
+      <button class="load-more-btn" id="loadMore">Дивитись більше</button>
+    </div>
+  </section>
+
+  <section class="cats-strip">
+    <div class="cat-card"><div class="cat-bg"><div class="cat-label">HOODIES</div></div></div>
+    <div class="cat-card"><div class="cat-bg"><div class="cat-label">TEES</div></div></div>
+    <div class="cat-card"><div class="cat-bg"><div class="cat-label">ДЕТАЛІ</div></div></div>
+  </section>
+</div>
+
+<div class="page" id="page-product">
+  <div class="prod-page">
+    <div class="breadcrumb">
+      <button onclick="goHome()">Головна</button> /
+      <button onclick="goHome()">Каталог</button> /
+      <span id="bc-name"></span>
+    </div>
+    <div class="prod-layout">
+      <div class="prod-gallery">
+        <div class="prod-main-img" id="prodMainImg"></div>
+        <div class="prod-thumbs" id="prodThumbs"></div>
+      </div>
+      <div>
+        <h1 class="prod-title" id="prodTitle"></h1>
+        <div class="prod-price-el" id="prodPrice"></div>
+        <div class="prod-desc" id="prodDesc"></div>
+        <div class="size-label">ОБЕРІТЬ ВЛАСНИЙ РОЗМІР</div>
+        <div class="size-grid" id="sizeGrid"></div>
+        <button class="add-btn" id="addBtn">ДОДАТИ В КОШИК</button>
+        <div class="prod-meta">
+          <div class="prod-meta-block">
+            <h4>📐 Допомога з розміром</h4>
+            <p>Не впевнені у параметрах? Перегляньте нашу детальну таблицю замірів.</p>
+          </div>
+          <div class="prod-meta-block">
+            <h4>🚚 Сервіс та логістика</h4>
+            <p>Обробка та підготовка замовлення триває до 10-14 днів. Локальна доставка — Нова Пошта, міжнародна — Global Shipping. Обмін та повернення доступні протягом 14 діб.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="related-section">
+    <h3>Схожі пропозиції</h3>
+    <div class="related-grid" id="relatedGrid"></div>
+  </section>
+</div>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-head">
+    <span class="cart-title">Ваші покупки</span>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty-msg" id="cartEmpty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <p>Тут поки порожньо</p>
+    </div>
+    <div id="cartItems"></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row"><span>Сума до сплати</span><span id="cartTotal">0 ₴</span></div>
+    <button class="checkout-btn">ПЕРЕЙТИ ДО ОПЛАТИ</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">VOR<span>WEAR</span></div>
+      <p class="foot-desc">Концептуальний бренд одягу. Ми створюємо речі для людей, які обирають якість та самовираження.</p>
+      <div class="foot-social">
+        <a class="soc-btn" href="#" target="_blank">INSTA</a>
+        <a class="soc-btn" href="#" target="_blank">VIBE</a>
+        <a class="soc-btn" href="#" target="_blank">NEWS</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Навігація</h4>
+      <button onclick="goHome()">Знижки</button>
+      <button onclick="goHome()">Верх</button>
+      <button onclick="goHome()">Футболки</button>
+      <button onclick="goHome()">Штани</button>
+      <button onclick="goHome()">Аксесуари</button>
+    </div>
+    <div class="foot-col">
+      <h4>Підтримка</h4>
+      <button>Зворотній зв'язок</button>
+      <button>Умови користування</button>
+      <button>Доставка</button>
+      <button>Гарантія повернення</button>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">VOR CONCEPT © 2026</span>
+    <div class="pay-icons">
+      <span class="pay-icon">SECURE PAY</span>
+      <span class="pay-icon">CARD</span>
+    </div>
+  </div>
+</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
