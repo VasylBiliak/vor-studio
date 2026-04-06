@@ -1,23 +1,15 @@
-
-
-
 "use client";
 
+import Header from "@/components/layout/Header/Header";
 import Hero from "@/components/sections/Hero/Hero";
 import ProductsGrid from "@/components/sections/ProductsGrid/ProductsGrid";
-
-import { Product } from "@/data/products";
+import Footer from "@/components/layout/Footer/Footer";
 
 export default function Page() {
-  const handleQuickAdd = (product: Product) => {
-    console.log('Quick add product:', product.name);
-    // TODO: Implement cart functionality
-  };
-
   return (
     <main>
       <Hero />
-      <ProductsGrid onQuickAdd={handleQuickAdd} />
+      <ProductsGrid />
     </main>
   );
 }

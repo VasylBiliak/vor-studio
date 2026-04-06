@@ -10,7 +10,7 @@ export interface Product {
   desc: string;
 }
 
-export const DEFAULT_IMG = 'https://placehold.co/600x800?text=600x800';
+export const DEFAULT_IMG = 'https://placehold.co/600x600?text=600x600';
 export const DEFAULT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 export const LOREM = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>';
 

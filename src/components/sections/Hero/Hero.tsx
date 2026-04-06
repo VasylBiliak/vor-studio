@@ -1,14 +1,9 @@
 "use client";
 
 import React from 'react';
+import { scrollToSection } from '@/src/utils/scrollTo';
 
 const Hero = () => {
-  const scrollToProducts = () => {
-    const element = document.getElementById('products-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section className="hero">
@@ -18,7 +13,7 @@ const Hero = () => {
         <p className="hero-tag">Естетика сезону 2026</p>
         <h1 className="hero-title">VOR<br/><em>STUDIO</em></h1>
         <p className="hero-sub">Ексклюзивний онлайн-шоп — Спроектовано в Україні</p>
-        <button className="hero-cta" onClick={scrollToProducts}>
+        <button className="hero-cta" onClick={() => scrollToSection('products-section')}>
           ПЕРЕГЛЯНУТИ КАТАЛОГ
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M5 12h14M12 5l7 7-7 7"/>

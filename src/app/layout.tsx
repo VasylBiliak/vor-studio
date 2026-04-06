@@ -1,5 +1,6 @@
 import { Montserrat, Almendra, Marcellus } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 const marcellus = Marcellus({
   weight: "400",
@@ -23,6 +24,7 @@ const almendra = Almendra({
 
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
+
 export default function RootLayout({
   children,
 }: {
@@ -34,9 +36,11 @@ export default function RootLayout({
       className={`${marcellus.variable} ${montserrat.variable} ${almendra.variable}`}
     >
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
