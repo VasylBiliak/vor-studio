@@ -1,5 +1,5 @@
 {
-  "name": "restaurant-menu-app-nextjs",
+  "name": "vor-studio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
-    "axios": "^1.14.0",
     "framer-motion": "^12.38.0",
     "next": "16.2.0",
     "papaparse": "^5.5.3",

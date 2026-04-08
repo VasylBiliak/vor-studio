@@ -88,7 +88,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
             <button
               onClick={handleDecrease}
               className="w-8 h-8 flex items-center justify-center text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-              aria-label="Зменшити кількість"
+              aria-label="Decrease quantity"
             >
               <AiOutlineMinus />
             </button>
@@ -98,7 +98,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
             <button
               onClick={handleIncrease}
               className="w-8 h-8 flex items-center justify-center text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-              aria-label="Збільшити кількість"
+              aria-label="Increase quantity"
             >
               <AiOutlinePlus />
             </button>
@@ -112,7 +112,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
             <button
               onClick={handleRemove}
               className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent-primary)] transition-colors"
-              aria-label="Видалити з кошика"
+              aria-label="Remove from cart"
             >
               <AiOutlineDelete className="w-5 h-5" />
             </button>

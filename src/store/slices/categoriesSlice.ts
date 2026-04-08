@@ -12,7 +12,7 @@ export const fetchCategories = createAsyncThunk<
       const data = await fetchAllCategories(lang);
       return data;
     } catch (error: any) {
-      return rejectWithValue(error.message || 'Не вдалося завантажити категорії');
+      return rejectWithValue(error.message || 'Failed to load categories');
     }
   }
 );

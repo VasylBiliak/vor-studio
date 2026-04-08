@@ -18,9 +18,9 @@ export const fetchAllCategories = async (
 
   try {
     const response = await fetch(CATEGORIES_SHEET_URL, {
-      cache: "no-store",
+      cache: "no-store",      
     });
-
+console.log(response);
     const csvText = await response.text();
 
     const rows = Papa.parse(csvText, {
@@ -62,17 +62,17 @@ export const fetchAllCategories = async (
       {
         id: "all",
         name: "all",
-        label: normalizedLang === "ua" ? "Всі" : "All",
+        label: "All",
       },
       {
         id: "new",
         name: "new",
-        label: normalizedLang === "ua" ? "Нові" : "New",
+        label: "New",
       },
       {
         id: "sale",
         name: "sale",
-        label: normalizedLang === "ua" ? "Знижки" : "Sale",
+        label: "Sale",
       },
       ...dynamicCategories,
     ];

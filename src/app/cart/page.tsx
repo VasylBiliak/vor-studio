@@ -27,13 +27,13 @@ export default function CartPage() {
   };
 
   const handleClearCart = () => {
-    if (confirm("Ви впевнені, що хочете очистити кошик?")) {
+    if (confirm("Are you sure you want to clear the cart?")) {
       dispatch(clearCart());
     }
   };
 
   const handleCheckout = () => {
-    alert("Функція оформлення замовлення в розробці");
+    alert("Checkout feature is under development");
   };
 
   if (cartItems.length === 0) {
@@ -41,7 +41,7 @@ export default function CartPage() {
       <main className="min-h-screen bg-[var(--color-bg-primary)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <h1 className="font-[Oswald] text-3xl font-bold uppercase tracking-wide text-[var(--color-text-primary)] mb-8">
-            Кошик
+            Cart
           </h1>
 
           <div className="text-center py-16">
@@ -49,16 +49,16 @@ export default function CartPage() {
               <AiOutlineShoppingCart className="w-16 h-16 mx-auto text-[var(--color-border)]" />
             </div>
             <h2 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">
-              Ваш кошик порожній
+              Your cart is empty
             </h2>
             <p className="text-[var(--color-text-secondary)] mb-8">
-              Додайте товари до кошика, щоб продовжити покупки
+              Add items to your cart to continue shopping
             </p>
             <button
               onClick={handleContinueShopping}
               className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--color-text-primary)] border-[1.5px] border-[var(--color-text-primary)] px-10 py-3.5 bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]"
             >
-              Продовжити покупки
+              Continue Shopping
             </button>
           </div>
         </div>
@@ -72,14 +72,14 @@ export default function CartPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-[Oswald] text-3xl font-bold uppercase tracking-wide text-[var(--color-text-primary)]">
-            Кошик ({totalItems})
+            Cart ({totalItems})
           </h1>
           <button
             onClick={handleClearCart}
             className="text-xs tracking-[1px] uppercase font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-accent-primary)] transition-colors flex items-center gap-2"
           >
             <AiOutlineDelete className="w-4 h-4" />
-            Очистити кошик
+            Clear Cart
           </button>
         </div>
 
@@ -97,13 +97,13 @@ export default function CartPage() {
           <div className="lg:col-span-1">
             <div className="border border-[var(--color-border)] p-6 sticky top-24">
               <h2 className="font-[Oswald] text-xl font-semibold uppercase tracking-wide text-[var(--color-text-primary)] mb-6">
-                Підсумок замовлення
+                Order Summary
               </h2>
 
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--color-text-secondary)]">
-                    Товарів ({totalItems})
+                    Items ({totalItems})
                   </span>
                   <span className="text-[var(--color-text-primary)]">
                     {formatPrice(totalAmount)}
@@ -111,10 +111,10 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--color-text-secondary)]">
-                    Доставка
+                    Shipping
                   </span>
                   <span className="text-[var(--color-text-primary)]">
-                    Розрахується при оформленні
+                    Calculated at checkout
                   </span>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function CartPage() {
               <div className="border-t border-[var(--color-border)] pt-4 mb-6">
                 <div className="flex justify-between">
                   <span className="font-semibold text-[var(--color-text-primary)]">
-                    Всього
+                    Total
                   </span>
                   <span className="font-semibold text-[var(--color-text-primary)]">
                     {formatPrice(totalAmount)}
@@ -134,14 +134,14 @@ export default function CartPage() {
                 onClick={handleCheckout}
                 className="w-full py-4 bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-xs tracking-[3px] uppercase font-bold cursor-pointer transition-colors hover:bg-[var(--color-accent-primary)] mb-4"
               >
-                Оформити замовлення
+                Checkout
               </button>
 
               <button
                 onClick={handleContinueShopping}
                 className="w-full text-[11px] tracking-[2px] uppercase font-bold text-[var(--color-text-primary)] border-[1.5px] border-[var(--color-text-primary)] px-4 py-3 bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]"
               >
-                Продовжити покупки
+                Continue Shopping
               </button>
             </div>
           </div>

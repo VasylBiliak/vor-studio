@@ -31,7 +31,7 @@ const Header = () => {
     <>
       {/* Announcement Banner */}
       <div className="text-[var(--color-dark-text)] text-center px-5 py-2.5 text-[11px] tracking-[2px] uppercase font-medium bg-[var(--color-dark-bg)]">
-        ПРИВІТАЛЬНИЙ БОНУС: БЕЗКОШТОВНА ДОСТАВКА ВІД 250 ЄВРО
+        WELCOME BONUS: FREE SHIPPING ON ORDERS OVER €250
       </div>
 
       {/* Header */}

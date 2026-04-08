@@ -9,10 +9,10 @@ const AboutSection = () => {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--color-text-primary)]">
-            Про VOR STUDIO
+            About VOR STUDIO
           </h1>
           <p className="text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-            Концептуальний бренд одягу, що поєднує українську спадщину з сучасними світовими трендами
+            A conceptual clothing brand that combines Ukrainian heritage with modern global trends
           </p>
         </div>
 
@@ -28,7 +28,7 @@ const AboutSection = () => {
         {/* Content Sections */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">Наша Історія</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">Our Story</h2>
             <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
@@ -38,7 +38,7 @@ const AboutSection = () => {
           </div>
           
           <div>
-            <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">Наша Філософія</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">Our Philosophy</h2>
             <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
             </p>
@@ -54,9 +54,9 @@ const AboutSection = () => {
             <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
               <span className="text-2xl">🎨</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">Дизайн</h3>
+            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">Design</h3>
             <p className="text-[var(--color-text-secondary)]">
-              Унікальний дизайн, що поєднує традиції та інновації
+              Unique design that blends tradition with innovation
             </p>
           </div>
           
@@ -64,9 +64,9 @@ const AboutSection = () => {
             <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
               <span className="text-2xl">🇺🇦</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">Якість</h3>
+            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">Quality</h3>
             <p className="text-[var(--color-text-secondary)]">
-              Вироблено в Україні з найкращих матеріалів
+              Made in Ukraine from the finest materials
             </p>
           </div>
           
@@ -74,16 +74,16 @@ const AboutSection = () => {
             <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
               <span className="text-2xl">🌍</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">Екологічність</h3>
+            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">Sustainability</h3>
             <p className="text-[var(--color-text-secondary)]">
-              Стійке виробництво та відповідальне споживання
+              Sustainable production and responsible consumption
             </p>
           </div>
         </div>
 
         {/* Team Section */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text-primary)]">Наша Команда</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text-primary)]">Our Team</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
               <div key={i} className="text-center">
@@ -92,8 +92,8 @@ const AboutSection = () => {
                   alt={`Team Member ${i}`} 
                   className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-2 border-[var(--color-border)]"
                 />
-                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">Ім'я Прізвище</h3>
-                <p className="text-[var(--color-text-secondary)]">Позиція в компанії</p>
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">Full Name</h3>
+                <p className="text-[var(--color-text-secondary)]">Position at company</p>
               </div>
             ))}
           </div>
@@ -102,17 +102,17 @@ const AboutSection = () => {
         {/* CTA Section */}
         <div className="bg-[var(--color-bg-secondary)] rounded-lg p-8 text-center border border-[var(--color-border)]">
           <h2 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">
-            Приєднуйтесь до нашої спільноти
+            Join Our Community
           </h2>
           <p className="text-[var(--color-text-secondary)] mb-6">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] px-6 py-3 rounded-lg hover:bg-[var(--color-text-tertiary)] transition-colors">
-              Переглянути Колекцію
+              View Collection
             </button>
             <button className="border border-[var(--color-border)] px-6 py-3 rounded-lg hover:bg-[var(--color-bg-primary)] hover:border-[var(--color-text-primary)] transition-colors">
-              Зв'язатися з нами
+              Contact Us
             </button>
           </div>
         </div>

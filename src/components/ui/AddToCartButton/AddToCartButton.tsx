@@ -18,7 +18,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   selectedSize,
   requireSize = true,
   className,
-  label = 'Додати в кошик',
+  label = 'Add to Cart',
 }) => {
   const { handleAddToCart } = useAddToCart();
 
@@ -26,7 +26,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     e.stopPropagation();
 
     if (requireSize && !selectedSize && product.sizes.length > 0) {
-      alert('Оберіть розмір');
+      alert('Please select a size');
       return;
     }
 

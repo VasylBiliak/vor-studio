@@ -23,10 +23,6 @@ const ProductsGrid: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  useEffect(() => {
     setShownCount(8);
   }, [selectedCategory]);
 
@@ -57,10 +53,10 @@ const ProductsGrid: React.FC = () => {
         ))}
       </div>
 
-      {/* Показуємо повідомлення, тільки якщо товари вже завантажені, але фільтр порожній */}
+      {/* Show message only when products are loaded but filter returns empty */}
       {filteredProducts.length === 0 && products.length > 0 && (
         <div className="text-center py-12">
-          <p className="text-[var(--color-text-secondary)]">Продуктів у цій категорії не знайдено</p>
+          <p className="text-[var(--color-text-secondary)]">No products found in this category</p>
         </div>
       )}
 
@@ -70,7 +66,7 @@ const ProductsGrid: React.FC = () => {
             onClick={handleLoadMore}
             className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--color-text-primary)] border-[1.5px] border-[var(--color-text-primary)] px-10 py-3.5 bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]"
           >
-            Дивитись більше
+            See more
           </button>
         </div>
       )}

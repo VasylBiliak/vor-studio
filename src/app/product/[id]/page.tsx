@@ -28,7 +28,7 @@ export default function ProductPage() {
       
       if (fetchedProduct) {
         setProduct(fetchedProduct);
-        // Встановлюємо перший доступний розмір як дефолтний
+        // Set the first available size as default
         if (fetchedProduct.sizes && fetchedProduct.sizes.length > 0) {
           setSelectedSize(fetchedProduct.sizes[0]);
         }
@@ -49,18 +49,18 @@ export default function ProductPage() {
   const formatPrice = (price: number) => price.toLocaleString('uk-UA') + ' ₴';
 
   if (isLoading) {
-    return <div className="p-10 text-center uppercase tracking-widest text-xs">Завантаження...</div>;
+    return <div className="p-10 text-center uppercase tracking-widest text-xs">Loading...</div>;
   }
 
   if (!product) {
     return (
       <div className="p-10">
-        <h1 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">Товар не знайдено</h1>
+        <h1 className="text-2xl font-bold mb-4 text-[var(--color-text-primary)]">Product not found</h1>
         <button
           onClick={() => router.push('/')}
           className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--color-text-primary)] border border-[var(--color-text-primary)] px-6 py-3 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)] transition-colors"
         >
-          Назад до головної
+          Back to Home
         </button>
       </div>
     );
@@ -73,13 +73,13 @@ export default function ProductPage() {
   const infoSections = [
     {
       key: 'sizes',
-      label: 'Розмірна сітка',
-      content: 'Вагаєтесь з вибором розміру? Скористайтеся нашою детальною таблицею замірів або зверніться до нас.',
+      label: 'Size Guide',
+      content: 'Unsure about sizing? Use our detailed measurement chart or contact us.',
     },
     {
       key: 'delivery',
-      label: 'Доставка та повернення',
-      content: 'Відправка — протягом 10-14 робочих днів після оплати. По Україні — Нова Пошта, за кордон — Global Shipping. Повернення можливе протягом 14 днів після отримання за умови збереження належного стану.',
+      label: 'Shipping & Returns',
+      content: 'Ships within 10-14 business days after payment. Within Ukraine — Nova Poshta, international — Global Shipping. Returns accepted within 14 days of receipt if the item remains in good condition.',
     },
   ];
 
@@ -88,11 +88,11 @@ export default function ProductPage() {
       <div className="px-4 sm:px-6 md:px-10 pt-5 pb-12">
         <div className="flex items-center gap-2 flex-wrap text-[10px] tracking-[1.5px] uppercase text-[var(--color-text-secondary)] mb-6">
           <button onClick={() => router.push('/')} className="bg-transparent border-none cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
-            Магазин
+            Store
           </button>
           <span>/</span>
           <button onClick={() => router.push('/')} className="bg-transparent border-none cursor-pointer text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
-            Каталог
+            Catalog
           </button>
           <span>/</span>
           <span className="text-[var(--color-text-primary)]">{product.name}</span>
@@ -154,7 +154,7 @@ export default function ProductPage() {
       {relatedProducts.length > 0 && (
         <section className="px-4 sm:px-6 md:px-10 py-10 border-t border-[var(--color-border)]">
           <h3 className="font-[Oswald] text-base font-semibold uppercase tracking-[3px] mb-7 text-[var(--color-text-primary)]">
-            Вам може сподобатись
+            You may also like
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0.5">
             {relatedProducts.map((relatedProduct, index) => (

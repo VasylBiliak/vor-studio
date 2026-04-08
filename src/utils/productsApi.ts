@@ -43,7 +43,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
 
     return productsCache;
   } catch (error) {
-    console.error('Помилка при завантаженні товарів:', error);
+    console.error('Error loading products:', error);
     return [];
   }
 };
