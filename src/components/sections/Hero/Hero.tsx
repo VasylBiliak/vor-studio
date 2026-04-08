@@ -6,19 +6,40 @@ import { scrollToSection } from '@/src/utils/scrollTo';
 const Hero = () => {
 
   return (
-    <section className="hero">
-      <div className="hero-bg"></div>
-      <div className="hero-grid"></div>
-      <div className="hero-content">
-        <p className="hero-tag">Естетика сезону 2026</p>
-        <h1 className="hero-title">VOR<br/><em>STUDIO</em></h1>
-        <p className="hero-sub">Ексклюзивний онлайн-шоп — Спроектовано в Україні</p>
-        <button className="hero-cta" onClick={() => scrollToSection('products-section')}>
-          ПЕРЕГЛЯНУТИ КАТАЛОГ
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </button>
+    // === Hero Section ===
+    <section
+      className="relative flex justify-center items-center 
+  pr-0! pl-0!"
+
+    >
+      {/* === Left Content === */}
+      <div
+        className="text-center flex flex-col justify-center items-center m-4 gap-16"
+      >
+        <h1
+          className="font-bold text-5xl leading-tight text-[var(--color-accent-tertiary)] capitalize tracking-wide
+        sm:text-6xl
+        md:text-8xl
+        2xl:text-9xl"
+        >
+          Welcome to ...
+        </h1>
+
+        <p
+        >
+          END OF SEASON SALE!
+          Big saving on select items. Up to 70% off!
+        </p>
+
+        <div>
+          <button
+            type="button"
+            className="group relative text-2xl cursor-pointer overflow-hidden border-2 border-[var(--color-accent-tertiary)] px-12 py-4   tracking-[0.2em] text-[var(--color-dark-text)] transition-all hover:bg-[var(--color-accent-tertiary)] hover:text-[var(--color-dark-bg)] active:scale-95 min-[2000px]:text-[1.8rem] mt-4"
+            onClick={() => scrollToSection('products')}
+          >
+            Click here to shop deals
+          </button>
+        </div>
       </div>
     </section>
   );

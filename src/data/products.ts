@@ -6,7 +6,7 @@ export interface Product {
   badge?: string | null;
   badgeType?: string | null;
   sizes: string[];
-  img: string;
+  img: string[]
   desc: string;
 }
 
@@ -23,7 +23,7 @@ export const PRODUCTS: Product[] = [
     badge: 'Best',
     badgeType: 'new',
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+    img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -33,7 +33,7 @@ export const PRODUCTS: Product[] = [
     price: 4800,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -43,7 +43,7 @@ export const PRODUCTS: Product[] = [
     price: 3800,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -54,7 +54,7 @@ export const PRODUCTS: Product[] = [
     badge: 'New Era',
     badgeType: 'new',
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
     price: 3300,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -74,7 +74,7 @@ export const PRODUCTS: Product[] = [
     price: 3300,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
     price: 3800,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
     badge: 'New',
     badgeType: 'new',
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
     price: 3800,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -116,7 +116,7 @@ export const PRODUCTS: Product[] = [
     badge: 'Sale',
     badgeType: 'sale',
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -126,7 +126,7 @@ export const PRODUCTS: Product[] = [
     price: 1600,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   },
   {
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
     price: 1600,
     badge: null,
     sizes: DEFAULT_SIZES,
-    img: DEFAULT_IMG,
+     img: [DEFAULT_IMG, DEFAULT_IMG],
     desc: LOREM
   }
 ];

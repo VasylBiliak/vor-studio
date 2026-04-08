@@ -1,77 +1,65 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PRODUCTS } from '@/data/products';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchAllCategories, Category } from '@/utils/getCategories';
 
-interface Category {
-  id: string;
-  name: string;
-  label: string;
-}
+export const fetchCategories = createAsyncThunk<
+  Category[],
+  string, 
+  { rejectValue: string }
+>(
+  'categories/fetchCategories',
+  async (lang, { rejectWithValue }) => {
+    try {
+      const data = await fetchAllCategories(lang);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message || 'Не вдалося завантажити категорії');
+    }
+  }
+);
 
 interface CategoriesState {
   categories: Category[];
   selectedCategory: string;
   isLoading: boolean;
+  error: string | null;
 }
 
 const initialState: CategoriesState = {
   categories: [],
   selectedCategory: 'all',
   isLoading: false,
-};
-
-// Helper function to generate categories from products
-const generateCategories = (): Category[] => {
-  const uniqueCategories = Array.from(new Set(PRODUCTS.map(p => p.category)));
-  
-  const categoryLabels: Record<string, string> = {
-    'all': 'Всі',
-    'sale': 'Розпродаж',
-    'new': 'Новинки',
-    'essentials': 'Essentials',
-    'hoodies': 'Худі',
-    'tees': 'Футболки'
-  };
-
-  const categories: Category[] = [
-    { id: 'all', name: 'all', label: categoryLabels['all'] },
-    { id: 'sale', name: 'sale', label: categoryLabels['sale'] },
-    { id: 'new', name: 'new', label: categoryLabels['new'] },
-    ...uniqueCategories.map(cat => ({
-      id: cat,
-      name: cat,
-      label: categoryLabels[cat] || cat
-    }))
-  ];
-
-  return categories;
+  error: null,
 };
 
 const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    setCategories: (state) => {
-      state.categories = generateCategories();
-      state.isLoading = false;
-    },
     setSelectedCategory: (state, action: PayloadAction<string>) => {
       state.selectedCategory = action.payload;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
     initializeCategories: (state) => {
-      if (state.categories.length === 0) {
-        state.categories = generateCategories();
-      }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCategories.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchCategories.fulfilled, (state, action: PayloadAction<Category[]>) => {
+        state.isLoading = false;
+        state.categories = action.payload;
+      })
+      .addCase(fetchCategories.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
 export const {
-  setCategories,
   setSelectedCategory,
-  setLoading,
   initializeCategories,
 } = categoriesSlice.actions;
 

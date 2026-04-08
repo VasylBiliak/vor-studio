@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { AppDispatch } from '@/store';
-import { Product, DEFAULT_IMG } from '@/data/products';
-import { addToCart, openCart } from '@/store/slices/cartSlice';
+import { useAddToCart } from '@/hooks/useAddToCart';
+import { Product } from '@/utils/productsApi';
+
+import { DEFAULT_IMG } from '@/data/products';
 
 interface ProductCardProps {
   product: Product;
@@ -13,88 +13,54 @@ interface ProductCardProps {
   index?: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickAdd, index = 0 }) => {
-  const dispatch = useDispatch<AppDispatch>();
+const ProductCard: React.FC<ProductCardProps> = React.memo(({ product, onQuickAdd, index = 0 }) => {
   const router = useRouter();
 
   const handleCardClick = () => {
     router.push(`/product/${product.id}`);
   };
 
-  const handleQuickAdd = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    
-    // Add to cart using Redux
-    dispatch(addToCart({ 
-      product, 
-      size: product.sizes.length > 0 ? product.sizes[0] : undefined 
-    }));
-    
-    // Open cart sidebar
-    dispatch(openCart());
-    
-    // Optional: Call the original onQuickAdd if provided
-    if (onQuickAdd) {
-      onQuickAdd(product);
-    }
-  };
+  const formatPrice = (price: number) => price.toLocaleString('uk-UA') + ' ₴';
 
-  const formatPrice = (price: number) => {
-    return price.toLocaleString('uk-UA') + ' ₴';
-  };
-
-  // Animation delay based on index
-  const animationDelay = Math.min(index * 40, 320); // Max 320ms delay
+  const animationDelay = Math.min(index * 40, 320);
 
   return (
-    <div 
-      className="group relative bg-white cursor-pointer overflow-hidden animate-fade-up"
+    <div
+      className="group relative bg-[var(--color-bg-primary)] cursor-pointer overflow-hidden animate-fade-up"
       onClick={handleCardClick}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
-      {/* Image Container */}
-      <div className="relative overflow-hidden aspect-[3/4] bg-[#f5f5f5]">
-        <img 
-          src={product.img || DEFAULT_IMG} 
+      <div className="relative overflow-hidden aspect-[3/4] bg-[var(--color-bg-secondary)]">
+        <img
+          src={(product.img && product.img[0]) || DEFAULT_IMG}
           className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105"
-          loading="lazy" 
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = DEFAULT_IMG;
-          }}
+          loading="lazy"
+          onError={(e) => { (e.target as HTMLImageElement).src = DEFAULT_IMG; }}
           alt={product.name}
         />
-        
-        {/* Badge */}
+
         {product.badge && (
-          <span className={`absolute top-3.5 left-3.5 text-[9px] tracking-[2px] uppercase font-bold px-2.5 py-1.5 text-white ${
-            product.badgeType === 'sale' ? 'bg-[#c0392b]' : 
-            product.badgeType === 'new' ? 'bg-[#2c7a4b]' : 'bg-[#0a0a0a]'
+          <span className={`absolute top-3.5 left-3.5 text-[9px] tracking-[2px] uppercase font-bold px-2.5 py-1.5 text-[var(--color-bg-primary)] ${
+            product.badgeType === 'sale' ? 'bg-[var(--color-accent-primary)]' :
+            product.badgeType === 'new' ? 'bg-[var(--color-accent-secondary)]' : 'bg-[var(--color-text-primary)]'
           }`}>
             {product.badge}
           </span>
         )}
       </div>
 
-      {/* Product Info */}
       <div className="px-1 pt-4 pb-5">
-        <div className="text-xs font-semibold tracking-wide uppercase text-[#0a0a0a] mb-2 leading-tight">
+        <div className="text-xs font-semibold tracking-wide uppercase text-[var(--color-text-primary)] mb-2 leading-tight">
           {product.name}
         </div>
-        <div className="text-sm font-semibold text-[#0a0a0a]">
+        <div className="text-sm font-semibold text-[var(--color-text-primary)]">
           {formatPrice(product.price)}
         </div>
       </div>
-
-      {/* Quick Add Button */}
-      <button 
-        onClick={handleQuickAdd}
-        className="absolute bottom-0 left-0 right-0 bg-[#0a0a0a] text-white text-[10px] tracking-[2px] uppercase font-bold px-3 py-3 text-center cursor-pointer w-full translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-      >
-        + До кошика
-      </button>
     </div>
   );
-};
+});
+
+ProductCard.displayName = 'ProductCard';
 
 export default ProductCard;
