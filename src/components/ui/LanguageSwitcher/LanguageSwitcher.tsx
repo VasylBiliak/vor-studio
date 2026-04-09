@@ -1,43 +1,48 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
-import { fetchCategories } from "@/store/slices/categoriesSlice";
+import React from "react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { LanguageCode } from "@/utils/i18n";
 
 const LanguageSwitcher: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const languages: ("en" | "ua" | "ru")[] = ["en", "ua", "ru"];
-  const [langIndex, setLangIndex] = useState(0);
+  const { lang, setLang, availableLanguages, isLoaded } = useTranslation();
 
-  useEffect(() => {
-    const savedLang = localStorage.getItem("lang") as "en" | "ua" | "ru";
-    if (savedLang) {
-      const index = languages.indexOf(savedLang);
-      if (index !== -1) setLangIndex(index);
-    }
-  }, []);
+  const handleLanguageChange = () => {
+    if (availableLanguages.length <= 1) return;
 
-  useEffect(() => {
-    dispatch(fetchCategories(languages[langIndex]));
-    localStorage.setItem("lang", languages[langIndex]);
-  }, [langIndex, dispatch]);
+    const currentIndex = availableLanguages.indexOf(lang);
+    const nextIndex = (currentIndex + 1) % availableLanguages.length;
+    const nextLang = availableLanguages[nextIndex] as LanguageCode;
 
-  const handleClick = () => {
-    setLangIndex((prev) => (prev + 1) % languages.length);
+    setLang(nextLang);
   };
+
+  if (!isLoaded) {
+    return (
+      <button
+        disabled
+        className="
+          px-6 py-2 rounded-lg font-semibold
+          bg-[var(--color-accent-primary)] text-[var(--color-bg-primary)]
+          opacity-70 cursor-default
+        "
+      >
+        {lang.toUpperCase()}
+      </button>
+    );
+  }
 
   return (
     <button
-      onClick={handleClick}
+      onClick={handleLanguageChange}
       className="
         px-6 py-2 rounded-lg font-semibold transition-all duration-200
         bg-[var(--color-accent-primary)] text-[var(--color-bg-primary)]
         shadow-[0_0_10px_var(--color-accent-primary)]
-        hover:bg-[var(--color-accent-primary-hover)]
+        hover:opacity-90
       "
     >
-      {languages[langIndex].toUpperCase()}
+      {lang.toUpperCase()}
     </button>
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { Montserrat, Almendra, Marcellus } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";

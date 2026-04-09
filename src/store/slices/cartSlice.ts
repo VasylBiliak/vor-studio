@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product } from '@/data/products';
+import { Product } from '@/utils/productsApi';
 
 export interface CartItem {
   product: Product;
@@ -31,12 +31,20 @@ const initialState: CartState = {
   lastAddedItem: null,
 };
 
+/**
+ * Helper to get effective price (finalPrice if discount applies, otherwise price)
+ */
+const getEffectivePrice = (product: Product): number => {
+  return product.hasDiscount ? product.finalPrice : product.price;
+};
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<{ product: Product; size?: string }>) => {
       const { product, size } = action.payload;
+      const price = getEffectivePrice(product);
       const existingItem = state.items.find(
         item => item.product.id === product.id && item.size === size
       );
@@ -44,7 +52,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += 1;
         state.totalItems += 1;
-        state.totalAmount += product.price;
+        state.totalAmount += price;
         state.lastAddedItem = {
           product,
           quantity: existingItem.quantity,
@@ -61,7 +69,7 @@ const cartSlice = createSlice({
         };
         state.items.push(cartItem);
         state.totalItems += 1;
-        state.totalAmount += product.price;
+        state.totalAmount += price;
         state.lastAddedItem = {
           product,
           quantity: 1,
@@ -78,8 +86,9 @@ const cartSlice = createSlice({
 
       if (itemIndex !== -1) {
         const item = state.items[itemIndex];
+        const price = getEffectivePrice(item.product);
         state.totalItems -= item.quantity;
-        state.totalAmount -= item.product.price * item.quantity;
+        state.totalAmount -= price * item.quantity;
         state.items.splice(itemIndex, 1);
       }
     },
@@ -90,9 +99,10 @@ const cartSlice = createSlice({
       );
 
       if (item) {
+        const price = getEffectivePrice(item.product);
         item.quantity += 1;
         state.totalItems += 1;
-        state.totalAmount += item.product.price;
+        state.totalAmount += price;
       }
     },
     decreaseQuantity: (state, action: PayloadAction<{ id: number; size?: string }>) => {
@@ -103,13 +113,14 @@ const cartSlice = createSlice({
 
       if (itemIndex !== -1) {
         const item = state.items[itemIndex];
+        const price = getEffectivePrice(item.product);
         if (item.quantity > 1) {
           item.quantity -= 1;
           state.totalItems -= 1;
-          state.totalAmount -= item.product.price;
+          state.totalAmount -= price;
         } else {
           state.totalItems -= 1;
-          state.totalAmount -= item.product.price;
+          state.totalAmount -= price;
           state.items.splice(itemIndex, 1);
         }
       }
@@ -140,8 +151,9 @@ const cartSlice = createSlice({
       const item = state.items.find(item => item.uid === uid);
 
       if (item && quantity > 0) {
+        const price = getEffectivePrice(item.product);
         const quantityDiff = quantity - item.quantity;
-        state.totalAmount += item.product.price * quantityDiff;
+        state.totalAmount += price * quantityDiff;
         state.totalItems += quantityDiff;
         item.quantity = quantity;
       }
@@ -162,7 +174,10 @@ const cartSlice = createSlice({
     },
     loadCartFromStorage: (state, action: PayloadAction<CartItem[]>) => {
       state.items = action.payload;
-      state.totalAmount = state.items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      state.totalAmount = state.items.reduce((sum, item) => {
+        const price = getEffectivePrice(item.product);
+        return sum + (price * item.quantity);
+      }, 0);
       state.totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0);
     },
     clearLastAddedItem: (state) => {

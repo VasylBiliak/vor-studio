@@ -2,8 +2,9 @@
 "use client";
 
 import React from 'react';
-import { Product } from '@/data/products';
+import { Product } from '@/utils/productsApi';
 import { useAddToCart } from '@/hooks/useAddToCart';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface AddToCartButtonProps {
   product: Product;
@@ -18,15 +19,19 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   selectedSize,
   requireSize = true,
   className,
-  label = 'Add to Cart',
+  label,
 }) => {
   const { handleAddToCart } = useAddToCart();
+  const { t } = useTranslation();
+
+  // Use provided label or fallback to translation
+  const buttonLabel = label || t("add_to_cart");
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
 
     if (requireSize && !selectedSize && product.sizes.length > 0) {
-      alert('Please select a size');
+      alert(t("select_size"));
       return;
     }
 
@@ -38,7 +43,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
       onClick={handleClick}
       className={className ?? 'w-full h-[50px] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-[11px] tracking-[3px] uppercase font-bold hover:opacity-75 transition-opacity'}
     >
-      {label}
+      {buttonLabel}
     </button>
   );
 };

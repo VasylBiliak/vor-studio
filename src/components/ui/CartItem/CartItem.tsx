@@ -13,6 +13,8 @@ import {
 import { DEFAULT_IMG } from "@/data/products";
 import SizeSelector from "@/components/ui/SizeSelector/SizeSelector";
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineDelete, AiOutlineDown } from "react-icons/ai";
+import { useTranslation } from "@/hooks/useTranslation";
+import { formatPrice } from "@/utils/formatCurrency";
 
 interface CartItemProps {
   item: CartItem;
@@ -20,6 +22,7 @@ interface CartItemProps {
 
 const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const { t, currency, lang } = useTranslation();
   const [isSizeDropdownOpen, setIsSizeDropdownOpen] = useState(false);
 
   const handleIncrease = () => {
@@ -45,15 +48,16 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
     setIsSizeDropdownOpen(false);
   };
 
-  const formatPrice = (price: number) => price.toLocaleString("uk-UA") + " ₴";
-  const itemTotal = item.product.price * item.quantity;
+  // Use finalPrice if discount applies, otherwise regular price
+  const currentPrice = item.product.hasDiscount ? item.product.finalPrice : item.product.price;
+  const itemTotal = currentPrice * item.quantity;
 
   return (
     <div className="flex gap-4 py-4 border-b border-[var(--color-border)]">
       {/* Product Image */}
       <div className="w-24 h-32 flex-shrink-0 bg-[var(--color-bg-secondary)] overflow-hidden">
         <img
-          src={item.product.img?.[0] || DEFAULT_IMG}
+          src={item.product.images?.[0] || DEFAULT_IMG}
           alt={item.product.name}
           className="w-full h-full object-cover"
           onError={(e) => {
@@ -69,9 +73,25 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
           <h3 className="font-[Oswald] text-sm font-semibold uppercase tracking-wide text-[var(--color-text-primary)] mb-1">
             {item.product.name}
           </h3>
-          <p className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
-            {formatPrice(item.product.price)}
-          </p>
+          <div className="flex items-center gap-2 mb-2">
+            {item.product.hasDiscount ? (
+              <>
+                <span className="text-sm font-semibold text-[var(--color-accent-primary)]">
+                  {formatPrice(item.product.finalPrice, currency, lang)}
+                </span>
+                <span className="text-xs text-[var(--color-text-secondary)] line-through">
+                  {formatPrice(item.product.price, currency, lang)}
+                </span>
+                <span className="text-xs font-bold text-[var(--color-accent-primary)]">
+                  -{item.product.discount}%
+                </span>
+              </>
+            ) : (
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                {formatPrice(item.product.price, currency, lang)}
+              </span>
+            )}
+          </div>
 
           {/* Size Selector */}
           <SizeSelector
@@ -88,7 +108,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
             <button
               onClick={handleDecrease}
               className="w-8 h-8 flex items-center justify-center text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-              aria-label="Decrease quantity"
+              aria-label={t("decrease_quantity")}
             >
               <AiOutlineMinus />
             </button>
@@ -98,7 +118,7 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
             <button
               onClick={handleIncrease}
               className="w-8 h-8 flex items-center justify-center text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-              aria-label="Increase quantity"
+              aria-label={t("increase_quantity")}
             >
               <AiOutlinePlus />
             </button>
@@ -107,12 +127,12 @@ const CartItemComponent: React.FC<CartItemProps> = ({ item }) => {
           {/* Item Total and Remove */}
           <div className="flex items-center gap-4">
             <span className="text-sm font-semibold text-[var(--color-text-primary)]">
-              {formatPrice(itemTotal)}
+              {formatPrice(itemTotal, currency, lang)}
             </span>
             <button
               onClick={handleRemove}
               className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent-primary)] transition-colors"
-              aria-label="Remove from cart"
+              aria-label={t("remove_from_cart")}
             >
               <AiOutlineDelete className="w-5 h-5" />
             </button>

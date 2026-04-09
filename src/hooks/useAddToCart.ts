@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
-import { Product } from '@/data/products';
+import { Product } from '@/utils/productsApi';
 import { addToCart, openCart } from '@/store/slices/cartSlice';
 
 export const useAddToCart = () => {

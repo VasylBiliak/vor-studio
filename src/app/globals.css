@@ -13,27 +13,51 @@
   }
 
   :root {
+    /* Design Tokens - Dynamic via Google Sheets */
+    /* Fallback values are defined here, then overridden by JS */
+
+    /* Colors - Background */
     --color-bg-primary: #0D0D0D;
     --color-bg-secondary: #1F1F1F;
 
+    /* Colors - Text */
     --color-text-primary: #FFFFFF;
     --color-text-secondary: #9CA3AF;
+    --color-text-tertiary: #6B7280;
 
+    /* Colors - Borders */
     --color-border: #2A2A2A;
+    --color-border-hover: #3A3A3A;
 
+    /* Colors - Accents */
     --color-accent-primary: #ee144b;
     --color-accent-primary-hover: #E6003E;
-
-    --color-accent-secondary: #9D4EDD;
-    --color-accent-tertiary: #00E5FF;
-
     --color-accent-secondary: #2C7A4B;
     --color-accent-tertiary: #DAC165;
 
-    /* Legacy dark theme variables (for dark sections) */
+    /* Colors - Dark theme (legacy) */
     --color-dark-bg: #0D0D0D;
     --color-dark-text: #FFFFFF;
     --color-dark-border: #2A2A2A;
+
+    /* Typography */
+    --font-base: 'Inter', system-ui, sans-serif;
+    --font-alt: 'Inter', system-ui, sans-serif;
+    --font-decorative: 'Oswald', sans-serif;
+
+    /* Layout */
+    --max-width: 1400px;
+    --section-padding: 5rem;
+
+    /* Border radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
   }
 
   body {
