@@ -16,13 +16,13 @@ const ProductsGrid: React.FC = () => {
   const [shownCount, setShownCount] = useState(8);
   const [products, setProducts] = useState<Product[]>([]);
   const selectedCategory = useSelector(selectSelectedCategory);
-  const { t } = useTranslation();
+  const { t, lang, defaultLanguage } = useTranslation();
 
   useEffect(() => {
-    getAllProducts().then((data) => {
+    getAllProducts(lang, defaultLanguage).then((data) => {
       setProducts(data);
     });
-  }, []);
+  }, [lang, defaultLanguage]);
 
   useEffect(() => {
     setShownCount(8);
