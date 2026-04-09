@@ -8,11 +8,13 @@ import { selectCartTotalItems } from '@/store/slices/cartSlice';
 import CategoryList from '@/components/ui/CategoryList/CategoryList';
 import CartButton from '@/components/ui/cartButton/CartButton';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher/LanguageSwitcher';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
   const cartItemsCount = useSelector(selectCartTotalItems);
+  const { t } = useTranslation();
 
   const navigateToHome = () => router.push('/');
   const navigateToCart = () => {
@@ -31,7 +33,7 @@ const Header = () => {
     <>
       {/* Announcement Banner */}
       <div className="text-[var(--color-dark-text)] text-center px-5 py-2.5 text-[11px] tracking-[2px] uppercase font-medium bg-[var(--color-dark-bg)]">
-        WELCOME BONUS: FREE SHIPPING ON ORDERS OVER €250
+        {t("welcome_bonus")} {t("currency")}
       </div>
 
       {/* Header */}
@@ -50,7 +52,7 @@ const Header = () => {
             onClick={navigateToHome}
             className="font-[Oswald] text-[22px] font-bold tracking-[3px] text-[var(--color-text-primary)] uppercase cursor-pointer bg-transparent border-none"
           >
-            VOR<span className="text-[var(--color-accent-primary)]">WEAR</span>
+            {t("logo_text_first_part")}<span className="text-[var(--color-accent-primary)]">{t("logo_text_second_part")}</span>
           </button>
 
           <div className="flex items-center gap-3 md:hidden">

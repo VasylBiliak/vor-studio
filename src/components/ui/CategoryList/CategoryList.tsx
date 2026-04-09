@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { scrollToSection } from '@/src/utils/scrollTo';
@@ -10,8 +10,9 @@ import {
   selectCategories,
   selectSelectedCategory,
   setSelectedCategory,
-  initializeCategories
+  fetchCategories
 } from '@/store/slices/categoriesSlice';
+import { selectLanguage } from '@/store/slices/i18nSlice';
 
 interface CategoryListProps {
   onClose?: () => void;
@@ -22,14 +23,13 @@ const CategoryList: React.FC<CategoryListProps> = ({ onClose }) => {
   const dispatch = useDispatch<AppDispatch>();
   const categories = useSelector(selectCategories);
   const selectedCategory = useSelector(selectSelectedCategory);
+  const lang = useSelector(selectLanguage);
   const router = useRouter();
 
-  const [lang, setLang] = useState<'en' | 'ua'>('en');
-
+  // Fetch categories when language changes
   useEffect(() => {
-    const savedLang = localStorage.getItem('lang') as 'en' | 'ua';
-    if (savedLang) setLang(savedLang);
-  }, [dispatch]);
+    dispatch(fetchCategories(lang));
+  }, [dispatch, lang]);
 
   const handleCategoryClick = (categoryId: string) => {
     router.push("/#products");

@@ -11,6 +11,8 @@ import {
   clearLastAddedItem,
 } from "@/store/slices/cartSlice";
 import { DEFAULT_IMG } from "@/data/products";
+import { useTranslation } from "@/hooks/useTranslation";
+import { formatPrice } from "@/utils/formatCurrency";
 
 const CartPopup: React.FC = () => {
   const router = useRouter();
@@ -18,6 +20,7 @@ const CartPopup: React.FC = () => {
   const lastAddedItem = useSelector(selectLastAddedItem);
   const totalItems = useSelector(selectCartTotalItems);
   const [isVisible, setIsVisible] = useState(false);
+  const { t, currency, lang } = useTranslation();
 
   useEffect(() => {
     if (lastAddedItem) {
@@ -54,15 +57,17 @@ const CartPopup: React.FC = () => {
   }, [dispatch, router]);
 
   const productImage = useMemo(() => {
-    const img = lastAddedItem?.product?.img;
-    return Array.isArray(img) ? img[0] : img || DEFAULT_IMG;
-  }, [lastAddedItem?.product?.id, lastAddedItem?.product?.img]);
+    const images = lastAddedItem?.product?.images;
+    return Array.isArray(images) && images.length > 0 ? images[0] : DEFAULT_IMG;
+  }, [lastAddedItem?.product?.id, lastAddedItem?.product?.images]);
 
   const formattedPrice = useMemo(() => {
-    return lastAddedItem?.product?.price 
-      ? lastAddedItem.product.price.toLocaleString("uk-UA") + " ₴" 
-      : "";
-  }, [lastAddedItem?.product?.id, lastAddedItem?.product?.price]);
+    if (!lastAddedItem?.product) return "";
+    const price = lastAddedItem.product.hasDiscount 
+      ? lastAddedItem.product.finalPrice 
+      : lastAddedItem.product.price;
+    return formatPrice(price, currency, lang);
+  }, [lastAddedItem?.product, currency, lang]);
 
   if (!lastAddedItem) return null;
 
@@ -81,12 +86,12 @@ const CartPopup: React.FC = () => {
               <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span className="text-sm font-semibold text-gray-800">Just added to your cart</span>
+              <span className="text-sm font-semibold text-gray-800">{t("just_added")}</span>
             </div>
             <button
               onClick={closeWithDelay}
               className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-md hover:bg-gray-200"
-              aria-label="Close"
+              aria-label={t("close")}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -109,11 +114,11 @@ const CartPopup: React.FC = () => {
                 <h3 className="text-sm font-semibold text-gray-900 truncate">{lastAddedItem.product.name}</h3>
                 <p className="text-sm text-gray-600 mt-0.5">{formattedPrice}</p>
                 <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-                  <span>Qty: {lastAddedItem.quantity}</span>
+                  <span>{t("qty")}: {lastAddedItem.quantity}</span>
                   {lastAddedItem.size && (
                     <>
                       <span className="text-gray-300">|</span>
-                      <span>Size: {lastAddedItem.size}</span>
+                      <span>{t("size")}: {lastAddedItem.size}</span>
                     </>
                   )}
                 </div>
@@ -121,7 +126,7 @@ const CartPopup: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg mb-4">
-              <span className="text-xs text-gray-500">Items in cart</span>
+              <span className="text-xs text-gray-500">{t("items_in_cart")}</span>
               <span className="text-sm font-semibold text-gray-900">{totalItems}</span>
             </div>
 
@@ -130,13 +135,13 @@ const CartPopup: React.FC = () => {
                 onClick={handleViewCart}
                 className="w-full py-2.5 bg-gray-900 text-white text-xs font-semibold uppercase tracking-wider rounded-lg hover:bg-gray-800 transition-colors"
               >
-                View cart
+                {t("view_cart")}
               </button>
               <button
                 onClick={closeWithDelay}
                 className="w-full py-2.5 bg-white text-gray-900 text-xs font-semibold uppercase tracking-wider rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
               >
-                Continue shopping
+                {t("continue_shopping")}
               </button>
             </div>
           </div>

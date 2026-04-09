@@ -4,17 +4,19 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
 import ProductCard from '@/components/ui/ProductCard/ProductCard';
-import { 
-  selectSelectedCategory, 
+import {
+  selectSelectedCategory,
   fetchCategories
 } from '@/store/slices/categoriesSlice';
 import { getAllProducts, Product } from '@/utils/productsApi';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ProductsGrid: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [shownCount, setShownCount] = useState(8);
   const [products, setProducts] = useState<Product[]>([]);
   const selectedCategory = useSelector(selectSelectedCategory);
+  const { t } = useTranslation();
 
   useEffect(() => {
     getAllProducts().then((data) => {
@@ -56,7 +58,7 @@ const ProductsGrid: React.FC = () => {
       {/* Show message only when products are loaded but filter returns empty */}
       {filteredProducts.length === 0 && products.length > 0 && (
         <div className="text-center py-12">
-          <p className="text-[var(--color-text-secondary)]">No products found in this category</p>
+          <p className="text-[var(--color-text-secondary)]">{t("no_products_found")}</p>
         </div>
       )}
 
@@ -66,7 +68,7 @@ const ProductsGrid: React.FC = () => {
             onClick={handleLoadMore}
             className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--color-text-primary)] border-[1.5px] border-[var(--color-text-primary)] px-10 py-3.5 bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]"
           >
-            See more
+            {t("see_more")}
           </button>
         </div>
       )}
