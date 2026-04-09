@@ -5,7 +5,8 @@ import { normalizeProducts, normalizeProduct } from '@/utils/normalizeProduct';
 // Re-export Product type for backward compatibility
 export type { Product } from '@/types/product';
 
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTod5vKdR--_HQ60J4hbJm8d1m2cMsWwzmMsqwQvfwalkVknhuVsXGpfUOGKZ-4ZbWysPgFaOxQ19pl/pub?gid=0&single=true&output=csv';
+const SHEET_URL = 
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vTod5vKdR--_HQ60J4hbJm8d1m2cMsWwzmMsqwQvfwalkVknhuVsXGpfUOGKZ-4ZbWysPgFaOxQ19pl/pub?gid=0&single=true&output=csv";
 
 // Cache for raw data (language-neutral)
 let rawProductsCache: RawProductRow[] = [];

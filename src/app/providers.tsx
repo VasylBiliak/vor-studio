@@ -7,6 +7,7 @@ import { loadTranslations } from '@/store/slices/i18nSlice';
 import CartPopup from '@/components/ui/CartPopup/CartPopup';
 import Loader from '@/components/ui/Loader/Loader';
 import { useTranslation } from '@/hooks/useTranslation';
+import { initializeTokens } from '@/utils/designTokens';
 import { AnimatePresence, motion } from 'framer-motion';
 
 interface ProvidersProps {
@@ -22,9 +23,14 @@ const I18nInitializer: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { initLang, isLoaded } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
+  const [tokensLoaded, setTokensLoaded] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+    // Initialize design tokens first
+    initializeTokens().then(() => {
+      setTokensLoaded(true);
+    });
     // Initialize language from localStorage
     initLang();
   }, [initLang]);
@@ -41,8 +47,8 @@ const I18nInitializer: React.FC<{ children: React.ReactNode }> = ({
     return <Loader />;
   }
 
-  // Show loader while translations are loading
-  if (!isLoaded) {
+  // Show loader while design tokens or translations are loading
+  if (!tokensLoaded || !isLoaded) {
     return <Loader />;
   }
 
