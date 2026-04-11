@@ -19,7 +19,7 @@ const Hero = () => {
         className="text-center flex flex-col justify-center items-center m-4 gap-16"
       >
         <h1
-          className="font-bold text-5xl leading-tight text-[var(--color-accent-tertiary)] capitalize tracking-wide
+          className="font-bold text-5xl leading-tight text-[var(--color-accent-primary)] capitalize tracking-wide
         sm:text-6xl
         md:text-8xl
         2xl:text-9xl"
@@ -32,15 +32,19 @@ const Hero = () => {
           {t("sale_description")}
         </p>
 
-        <div>
+
           <button
             type="button"
-            className="group relative text-2xl cursor-pointer overflow-hidden border-2 border-[var(--color-accent-tertiary)] px-12 py-4   tracking-[0.2em] text-[var(--color-dark-text)] transition-all hover:bg-[var(--color-accent-tertiary)] hover:text-[var(--color-dark-bg)] active:scale-95 min-[2000px]:text-[1.8rem] mt-4"
+            className="group relative text-2xl 
+            cursor-pointer overflow-hidden 
+            border-2 px-2 py-2   tracking-[0.2em] 
+            text-[var(--color-dark-text)] transition-all 
+            hover:bg-[var(--color-accent-primary)]
+            active:scale-95 min-[2000px]:text-[1.8rem]"
             onClick={() => scrollToSection('products')}
           >
             {t("shop_deals")}
           </button>
-        </div>
       </div>
     </section>
   );

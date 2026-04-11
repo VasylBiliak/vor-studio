@@ -66,8 +66,14 @@ const ProductsGrid: React.FC = () => {
         <div className="text-center py-10">
           <button
             onClick={handleLoadMore}
-            className="text-[11px] tracking-[2px] uppercase font-bold text-[var(--color-text-primary)] border-[1.5px] border-[var(--color-text-primary)] px-10 py-3.5 bg-transparent cursor-pointer transition-colors duration-200 hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)]"
-          >
+                        className="group relative text-2xl cursor-pointer overflow-hidden 
+            border-2 px-12 py-4   tracking-[0.2em] 
+            text-[var(--color-dark-text)] transition-all 
+            hover:bg-[var(--color-accent-primary)]
+            active:scale-95 min-[2000px]:text-[1.8rem] mt-4"
+            
+
+>
             {t("see_more")}
           </button>
         </div>

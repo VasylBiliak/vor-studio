@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="overflow-hidden relative z-10 flex flex-col items-center bg-[var(--color-bg-primary)] border-t border-[var(--color-border)]"
+      className="overflow-hidden relative z-10 flex flex-col items-center border-t border-[var(--color-border)]"
       role="contentinfo"
       aria-label={t("footer")}
     >
@@ -92,6 +92,8 @@ const Footer = () => {
         <p className="font-alt text-[var(--color-text-secondary)]/50 text-sm">
           © {new Date().getFullYear()} {t("all_rights_reserved")}
         </p>
+
+        
       </div>
     </footer>
   );

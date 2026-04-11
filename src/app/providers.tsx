@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 import { loadTranslations } from '@/store/slices/i18nSlice';
-import CartPopup from '@/components/ui/CartPopup/CartPopup';
+// CartPopup disabled - replaced by AddToCartModal on product page
+// import CartPopup from '@/components/ui/CartPopup/CartPopup';
 import Loader from '@/components/ui/Loader/Loader';
 import { useTranslation } from '@/hooks/useTranslation';
 import { initializeTokens } from '@/utils/designTokens';
@@ -71,7 +72,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
     <Provider store={store}>
       <I18nInitializer>
         {children}
-        <CartPopup />
+        {/* CartPopup disabled - replaced by AddToCartModal */}
       </I18nInitializer>
     </Provider>
   );

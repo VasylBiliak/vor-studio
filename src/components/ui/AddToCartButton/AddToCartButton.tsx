@@ -41,7 +41,8 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   return (
     <button
       onClick={handleClick}
-      className={className ?? 'w-full h-[50px] bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-[11px] tracking-[3px] uppercase font-bold hover:opacity-75 transition-opacity'}
+      className={className ?? 
+        'w-full py-4 bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-xs tracking-[3px] uppercase font-bold cursor-pointer transition-colors hover:bg-[var(--color-accent-primary)] mb-4'}
     >
       {buttonLabel}
     </button>

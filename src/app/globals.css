@@ -18,6 +18,12 @@
 
     /* Colors - Background */
     --color-bg-primary: #0D0D0D;
+     --gradient-primary: linear-gradient(
+    180deg,
+rgba(0, 0, 22, 0.984) 0%, rgb(1, 17, 27) 42%,
+ rgb(0, 13, 17) 60%, rgb(3, 3, 40) 100%
+  );
+  /* background: var(--gradient-primary); */
     --color-bg-secondary: #1F1F1F;
 
     /* Colors - Text */
@@ -39,6 +45,9 @@
     --color-dark-bg: #0D0D0D;
     --color-dark-text: #FFFFFF;
     --color-dark-border: #2A2A2A;
+
+    /* Modal overlay */
+    --modal_bg: rgba(0, 0, 0, 0.6);
 
     /* Typography */
     --font-base: 'Inter', system-ui, sans-serif;
@@ -72,15 +81,20 @@
     position: sticky;
     top: 0;
     z-index: 900;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--color-bg-primary);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
     max-width: 1400px;
     margin: 0 auto;
   }
+  header:hover {
+    backdrop-filter: blur(40px);
+  }
+
 
   footer {
-    background: var(--color-dark-bg);
+    background: transparent;
+    /* background: var(--color-dark-bg); */
     color: var(--color-dark-text);
     padding: 60px 40px 30px;
     max-width: 1400px;
@@ -176,12 +190,16 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-accent-primary);
+    background: white;
     border-radius: 10px;
+  }
+    ::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-accent-primary-hover);
+    background: var(--color-accent-primary);
   }
 
   /* ANIMATIONS */

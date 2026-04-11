@@ -1,15 +1,14 @@
-"use client";
+import { fetchSeoData, buildMetadata } from '@/utils/seo';
+import HomeContent from './HomeContent';
 
-import Header from "@/components/layout/Header/Header";
-import Hero from "@/components/sections/Hero/Hero";
-import ProductsGrid from "@/components/sections/ProductsGrid/ProductsGrid";
-import Footer from "@/components/layout/Footer/Footer";
+export async function generateMetadata() {
+  const { seoData, defaultLanguage } = await fetchSeoData();
+
+  return buildMetadata(seoData, 'home', defaultLanguage, defaultLanguage, {
+    pathname: '/',
+  });
+}
 
 export default function Page() {
-  return (
-    <main>
-      <Hero />
-      <ProductsGrid />
-    </main>
-  );
+  return <HomeContent />;
 }

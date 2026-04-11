@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,6 +15,20 @@ const Header = () => {
   const router = useRouter();
   const cartItemsCount = useSelector(selectCartTotalItems);
   const { t } = useTranslation();
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const navigateToHome = () => router.push('/');
   const navigateToCart = () => {
@@ -32,25 +46,26 @@ const Header = () => {
   return (
     <>
       {/* Announcement Banner */}
-      <div className="text-[var(--color-dark-text)] text-center px-5 py-2.5 text-[11px] tracking-[2px] uppercase font-medium bg-[var(--color-dark-bg)]">
+      <div className="text-[var(--color-dark-text)] text-center 
+      px-5 py-2.5 text-[11px] tracking-[2px] uppercase font-medium">
         {t("welcome_bonus")} {t("currency")}
       </div>
 
       {/* Header */}
       <motion.header
-        className="sticky top-0 z-[900] bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]"
+        className="sticky top-0 z-[900] border-b 
+        border-[var(--color-border)]"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
-        {/* Top Bar */}
         {/* Top Bar */}
         <div className="flex items-center justify-between px-4 sm:px-8 md:px-14 h-16">
 
           {/* Logo */}
           <button
             onClick={navigateToHome}
-            className="font-[Oswald] text-[22px] font-bold tracking-[3px] text-[var(--color-text-primary)] uppercase cursor-pointer bg-transparent border-none"
+            className="font-[Oswald] text-xl font-bold tracking-[3px] text-[var(--color-text-primary)] uppercase cursor-pointer bg-transparent transition-all duration-300 hover:scale-105 hover:text-[var(--color-accent-primary)]"
           >
             {t("logo_text_first_part")}<span className="text-[var(--color-accent-primary)]">{t("logo_text_second_part")}</span>
           </button>
@@ -60,23 +75,37 @@ const Header = () => {
           </div>
 
           {/* RIGHT */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center">
 
+            <div className="hidden md:flex items-center  gap-6 md:gap-8 lg:gap-12">
+              <div className="flex items-center gap-3 md:hidden">
+              </div>
 
-            <div className="hidden md:flex items-center gap-4">
-              <CartButton count={cartItemsCount} onClick={navigateToCart} />
+              <button
+                onClick={navigateToAbout}
+                className="relative font-[Oswald] text-xs font-semibold uppercase tracking-[2px] 
+                bg-transparent py-2 text-left w-full cursor-pointer
+                text-[var(--color-text-primary)] transition-colors duration-300
+                hover:text-[var(--color-accent-primary)]
+                after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 
+                after:bg-[var(--color-accent-primary)] after:transition-all after:duration-300
+                hover:after:w-full"
+              >
+                {t("about")}
+              </button>
               <LanguageSwitcher />
+              <CartButton count={cartItemsCount} onClick={navigateToCart} />
             </div>
 
             {/* Burger */}
             <button
               onClick={toggleMobileMenu}
-              className=" flex flex-col gap-[5px] p-1 bg-transparent border-none cursor-pointer md:hidden lg:hidden"
+              className="flex flex-col gap-[5px] p-1 bg-transparent md:hidden lg:hidden group"
               aria-label="Toggle menu"
             >
-              <span className="block w-6 h-0.5 bg-[var(--color-text-primary)]" />
-              <span className="block w-6 h-0.5 bg-[var(--color-text-primary)]" />
-              <span className="block w-6 h-0.5 bg-[var(--color-text-primary)]" />
+              <span className="block w-6 h-0.5 bg-[var(--color-text-primary)] transition-all duration-300 group-hover:bg-[var(--color-accent-primary)]" />
+              <span className="block w-6 h-0.5 bg-[var(--color-text-primary)] transition-all duration-300 group-hover:bg-[var(--color-accent-primary)]" />
+              <span className="block w-6 h-0.5 bg-[var(--color-text-primary)] transition-all duration-300 group-hover:bg-[var(--color-accent-primary)]" />
             </button>
 
           </div>
@@ -95,7 +124,8 @@ const Header = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 bg-[var(--color-bg-primary)] z-[1500] flex flex-col justify-center items-center px-8 md:hidden"
+            className="fixed inset-0 z-[1500] flex flex-col 
+            justify-center bg-[var(--color-bg-primary)] items-center px-8 md:hidden"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -104,16 +134,46 @@ const Header = () => {
             {/* Close */}
             <button
               onClick={closeMobileMenu}
-              className="absolute top-5 right-6 bg-transparent border-none text-[28px] cursor-pointer text-[var(--color-text-primary)] leading-none"
+              className="absolute top-5 right-6 bg-transparent text-[28px] cursor-pointer text-[var(--color-text-primary)] leading-none transition-colors hover:text-[var(--color-accent-primary)]"
               aria-label="Close menu"
             >
               ✕
             </button>
 
             {/* Links */}
-            <nav className="flex flex-col items-center gap-1 w-full">
-              <CategoryList onClose={closeMobileMenu} />
-              <LanguageSwitcher />
+            <nav className="flex flex-col justify-center items-center gap-4 w-full h-full text-center">
+              {/* About Button */}
+              <motion.button
+                onClick={navigateToAbout}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+                className="relative font-[Oswald] text-[28px] font-semibold uppercase tracking-[2px] 
+                text-[var(--color-text-primary)] bg-transparent py-2 cursor-pointer
+                transition-all duration-300 hover:text-[var(--color-accent-primary)] hover:scale-105
+                after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 
+                after:bg-[var(--color-accent-primary)] after:transition-all after:duration-300
+                hover:after:w-full"
+              >
+                {t("about")}
+              </motion.button>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="w-full flex flex-col items-center"
+              >
+                <CategoryList onClose={closeMobileMenu} />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              >
+                <LanguageSwitcher />
+              </motion.div>
             </nav>
           </motion.div>
         )}

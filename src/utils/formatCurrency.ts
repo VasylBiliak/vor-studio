@@ -4,16 +4,78 @@
  */
 
 /**
+ * Map currency symbols to ISO codes
+ * This handles cases where symbols like "€" are passed instead of "EUR"
+ */
+const CURRENCY_MAP: Record<string, string> = {
+  '€': 'EUR',
+  '$': 'USD',
+  '₴': 'UAH',
+  '£': 'GBP',
+  '¥': 'JPY', // Also used for CNY, but JPY is more common for ¥ symbol
+  '₽': 'RUB',
+  '₹': 'INR',
+  '₩': 'KRW',
+  '元': 'CNY', // Chinese character for Yuan
+  '฿': 'THB',
+  '₫': 'VND',
+  '₪': 'ILS',
+  '₺': 'TRY',
+  '₦': 'NGN',
+  '₱': 'PHP',
+  '₲': 'PYG',
+  '₡': 'CRC',
+  '₭': 'LAK',
+  '₮': 'MNT',
+  '₳': 'ARA',
+  '₵': 'GHS',
+  '¢': 'USD',
+  '﷼': 'IRR',
+  'ᴃ': 'BTC',
+};
+
+/**
+ * Normalize currency code to valid ISO 4217 format
+ * Handles both symbols (€ → EUR) and lowercase codes (eur → EUR)
+ *
+ * @param currency - The currency code or symbol
+ * @returns Normalized ISO 4217 currency code
+ */
+function normalizeCurrency(currency: string): string {
+  if (!currency) return 'USD';
+
+  const trimmed = currency.trim();
+
+  // Check if it's a symbol in our map
+  const mapped = CURRENCY_MAP[trimmed];
+  if (mapped) return mapped;
+
+  // Otherwise, uppercase the code
+  return trimmed.toUpperCase();
+}
+
+/**
+ * Validate if a string is a valid ISO 4217 currency code (3 uppercase letters)
+ *
+ * @param code - The currency code to validate
+ * @returns True if valid ISO 4217 code
+ */
+function isValidCurrencyCode(code: string): boolean {
+  return /^[A-Z]{3}$/.test(code);
+}
+
+/**
  * Format a number as currency using Intl.NumberFormat
  *
  * @param value - The numeric value to format
- * @param currency - The currency code (e.g., 'USD', 'UAH', 'EUR')
+ * @param currency - The currency code (e.g., 'USD', 'UAH', 'EUR') or symbol (e.g., '€', '$', '₴')
  * @param locale - The locale string (e.g., 'en-US', 'uk-UA')
  * @returns Formatted currency string
  *
  * @example
  * formatCurrency(1000, 'USD', 'en-US') // "$1,000.00"
  * formatCurrency(1000, 'UAH', 'uk-UA') // "1 000,00 ₴"
+ * formatCurrency(1000, '€', 'de-DE')   // "1.000,00 €" (symbol mapped to EUR)
  */
 export function formatCurrency(
   value: number,
@@ -22,8 +84,16 @@ export function formatCurrency(
 ): string {
   // Ensure valid inputs
   const safeValue = typeof value === 'number' && !isNaN(value) ? value : 0;
-  const safeCurrency = currency?.toUpperCase() || 'USD';
   const safeLocale = locale || 'en-US';
+
+  // Normalize currency: symbol → ISO code, lowercase → uppercase
+  let safeCurrency = normalizeCurrency(currency);
+
+  // Validate and fallback to USD if invalid
+  if (!isValidCurrencyCode(safeCurrency)) {
+    console.warn(`Invalid currency code: "${currency}", falling back to USD`);
+    safeCurrency = 'USD';
+  }
 
   try {
     return new Intl.NumberFormat(safeLocale, {
@@ -33,7 +103,7 @@ export function formatCurrency(
       maximumFractionDigits: 2,
     }).format(safeValue);
   } catch (error) {
-    // Fallback if Intl.NumberFormat fails (e.g., invalid currency code)
+    // Fallback if Intl.NumberFormat fails (e.g., unsupported currency)
     console.warn(`Currency formatting failed for ${safeCurrency}:`, error);
     return `${safeValue.toFixed(2)} ${safeCurrency}`;
   }
@@ -56,8 +126,13 @@ export function formatCompactCurrency(
   locale: string = 'en-US'
 ): string {
   const safeValue = typeof value === 'number' && !isNaN(value) ? value : 0;
-  const safeCurrency = currency?.toUpperCase() || 'USD';
   const safeLocale = locale || 'en-US';
+
+  // Normalize and validate currency
+  let safeCurrency = normalizeCurrency(currency);
+  if (!isValidCurrencyCode(safeCurrency)) {
+    safeCurrency = 'USD';
+  }
 
   try {
     return new Intl.NumberFormat(safeLocale, {
@@ -87,8 +162,13 @@ export function getCurrencySymbol(
   currency: string,
   locale: string = 'en-US'
 ): string {
-  const safeCurrency = currency?.toUpperCase() || 'USD';
   const safeLocale = locale || 'en-US';
+
+  // Normalize and validate currency
+  let safeCurrency = normalizeCurrency(currency);
+  if (!isValidCurrencyCode(safeCurrency)) {
+    safeCurrency = 'USD';
+  }
 
   try {
     const formatter = new Intl.NumberFormat(safeLocale, {
