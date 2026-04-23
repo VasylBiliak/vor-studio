@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { FaPaintBrush, FaFlag, FaGlobe } from "react-icons/fa";
 
 const AboutSection = () => {
   const { t } = useTranslation();
@@ -52,37 +53,43 @@ const AboutSection = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center">
-            <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
-              <span className="text-2xl">🎨</span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">{t("design")}</h3>
-            <p className="text-[var(--color-text-secondary)]">
-              {t("design_desc")}
-            </p>
-          </div>
+<div className="grid md:grid-cols-3 gap-8 mb-16">
+  <div className="text-center">
+    <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
+      <FaPaintBrush className="text-3xl text-[var(--color-accent-primary)]" />
+    </div>
+    <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
+      {t("design")}
+    </h3>
+    <p className="text-[var(--color-text-secondary)]">
+      {t("design_desc")}
+    </p>
+  </div>
 
-          <div className="text-center">
-            <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
-              <span className="text-2xl">🇺🇦</span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">{t("quality")}</h3>
-            <p className="text-[var(--color-text-secondary)]">
-              {t("quality_desc")}
-            </p>
-          </div>
+  <div className="text-center">
+    <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
+      <FaFlag className="text-3xl text-[var(--color-accent-primary)]" />
+    </div>
+    <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
+      {t("quality")}
+    </h3>
+    <p className="text-[var(--color-text-secondary)]">
+      {t("quality_desc")}
+    </p>
+  </div>
 
-          <div className="text-center">
-            <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
-              <span className="text-2xl">🌍</span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">{t("sustainability")}</h3>
-            <p className="text-[var(--color-text-secondary)]">
-              {t("sustainability_desc")}
-            </p>
-          </div>
-        </div>
+  <div className="text-center">
+    <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
+      <FaGlobe className="text-3xl text-[var(--color-accent-primary)]" />
+    </div>
+    <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
+      {t("sustainability")}
+    </h3>
+    <p className="text-[var(--color-text-secondary)]">
+      {t("sustainability_desc")}
+    </p>
+  </div>
+</div>
 
         {/* Team Section */}
         <div className="mb-16">
