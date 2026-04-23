@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import { FaPaintBrush, FaFlag, FaGlobe } from "react-icons/fa";
+import Link from 'next/link';
 
 const AboutSection = () => {
   const { t } = useTranslation();
@@ -53,43 +54,43 @@ const AboutSection = () => {
         </div>
 
         {/* Features Grid */}
-<div className="grid md:grid-cols-3 gap-8 mb-16">
-  <div className="text-center">
-    <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
-      <FaPaintBrush className="text-3xl text-[var(--color-accent-primary)]" />
-    </div>
-    <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
-      {t("design")}
-    </h3>
-    <p className="text-[var(--color-text-secondary)]">
-      {t("design_desc")}
-    </p>
-  </div>
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center">
+            <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
+              <FaPaintBrush className="text-3xl text-[var(--color-accent-primary)]" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
+              {t("design")}
+            </h3>
+            <p className="text-[var(--color-text-secondary)]">
+              {t("design_desc")}
+            </p>
+          </div>
 
-  <div className="text-center">
-    <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
-      <FaFlag className="text-3xl text-[var(--color-accent-primary)]" />
-    </div>
-    <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
-      {t("quality")}
-    </h3>
-    <p className="text-[var(--color-text-secondary)]">
-      {t("quality_desc")}
-    </p>
-  </div>
+          <div className="text-center">
+            <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
+              <FaFlag className="text-3xl text-[var(--color-accent-primary)]" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
+              {t("quality")}
+            </h3>
+            <p className="text-[var(--color-text-secondary)]">
+              {t("quality_desc")}
+            </p>
+          </div>
 
-  <div className="text-center">
-    <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
-      <FaGlobe className="text-3xl text-[var(--color-accent-primary)]" />
-    </div>
-    <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
-      {t("sustainability")}
-    </h3>
-    <p className="text-[var(--color-text-secondary)]">
-      {t("sustainability_desc")}
-    </p>
-  </div>
-</div>
+          <div className="text-center">
+            <div className="w-20 h-20 bg-[var(--color-bg-secondary)] rounded-full mx-auto mb-4 flex items-center justify-center border border-[var(--color-border)]">
+              <FaGlobe className="text-3xl text-[var(--color-accent-primary)]" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">
+              {t("sustainability")}
+            </h3>
+            <p className="text-[var(--color-text-secondary)]">
+              {t("sustainability_desc")}
+            </p>
+          </div>
+        </div>
 
         {/* Team Section */}
         <div className="mb-16">
@@ -118,12 +119,19 @@ const AboutSection = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] px-6 py-3 rounded-lg hover:bg-[var(--color-text-tertiary)] transition-colors">
+            <Link
+              href="/#products"
+              className="bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] px-6 py-3 rounded-lg hover:bg-[var(--color-text-tertiary)] transition-colors text-center"
+            >
               {t("view_collection")}
-            </button>
-            <button className="border border-[var(--color-border)] px-6 py-3 rounded-lg hover:bg-[var(--color-bg-primary)] hover:border-[var(--color-text-primary)] transition-colors">
+            </Link>
+
+            <Link
+              href="/contact"
+              className="border border-[var(--color-border)] px-6 py-3 rounded-lg hover:bg-[var(--color-bg-primary)] hover:border-[var(--color-text-primary)] transition-colors text-center"
+            >
               {t("contact_us")}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
