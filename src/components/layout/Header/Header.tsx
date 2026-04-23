@@ -43,6 +43,11 @@ const Header = () => {
     closeMobileMenu();
   };
 
+  const navigateToContact = () => {
+    router.push('/contact');
+    closeMobileMenu();
+  };
+
   return (
     <>
       {/* Announcement Banner */}
@@ -83,15 +88,27 @@ const Header = () => {
 
               <button
                 onClick={navigateToAbout}
-                className="relative font-[Oswald] text-xs font-semibold uppercase tracking-[2px] 
+                className="relative font-[Oswald] text-xs font-semibold uppercase tracking-[2px]
                 bg-transparent py-2 text-left w-full cursor-pointer
                 text-[var(--color-text-primary)] transition-colors duration-300
                 hover:text-[var(--color-accent-primary)]
-                after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 
+                after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
                 after:bg-[var(--color-accent-primary)] after:transition-all after:duration-300
                 hover:after:w-full"
               >
                 {t("about")}
+              </button>
+              <button
+                onClick={navigateToContact}
+                className="relative font-[Oswald] text-xs font-semibold uppercase tracking-[2px]
+                bg-transparent py-2 text-left w-full cursor-pointer
+                text-[var(--color-text-primary)] transition-colors duration-300
+                hover:text-[var(--color-accent-primary)]
+                after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
+                after:bg-[var(--color-accent-primary)] after:transition-all after:duration-300
+                hover:after:w-full"
+              >
+                {t("contact_nav")}
               </button>
               <LanguageSwitcher />
               <CartButton count={cartItemsCount} onClick={navigateToCart} />
@@ -148,14 +165,30 @@ const Header = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="relative font-[Oswald] text-[28px] font-semibold uppercase tracking-[2px] 
+                className="relative font-[Oswald] text-[28px] font-semibold uppercase tracking-[2px]
                 text-[var(--color-text-primary)] bg-transparent py-2 cursor-pointer
                 transition-all duration-300 hover:text-[var(--color-accent-primary)] hover:scale-105
-                after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 
+                after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0
                 after:bg-[var(--color-accent-primary)] after:transition-all after:duration-300
                 hover:after:w-full"
               >
                 {t("about")}
+              </motion.button>
+
+              {/* Contact Button */}
+              <motion.button
+                onClick={navigateToContact}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="relative font-[Oswald] text-[28px] font-semibold uppercase tracking-[2px]
+                text-[var(--color-text-primary)] bg-transparent py-2 cursor-pointer
+                transition-all duration-300 hover:text-[var(--color-accent-primary)] hover:scale-105
+                after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0
+                after:bg-[var(--color-accent-primary)] after:transition-all after:duration-300
+                hover:after:w-full"
+              >
+                {t("contact_nav")}
               </motion.button>
 
               <motion.div
