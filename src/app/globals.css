@@ -309,4 +309,14 @@ rgba(0, 0, 22, 0.984) 0%, rgb(1, 17, 27) 42%,
   .border-default-hover:hover {
     border-color: var(--color-border-hover);
   }
+
+::selection {
+    background-color: var(--color-green-dark);
+    color: var(--text-primary);
+}
+
+::-moz-selection {
+    background-color: var(--color-green-dark);
+    color: var(--text-primary);
+}
 }

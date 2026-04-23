@@ -68,10 +68,26 @@ const FALLBACK_TRANSLATIONS: Translations = {
     see_more: 'See more',
     no_products_found: 'No products found in this category',
 
+    // Navigation
+    contact_nav: 'Contact',
+
     // About
     about_title: 'About VOR STUDIO',
     about_subtitle:
       'A conceptual clothing brand that combines Ukrainian heritage with modern global trends',
+
+    // Contact
+    contact_title: 'Contact Us',
+    contact_description: 'Get in touch with us. We\'d love to hear from you.',
+    contact_form_name: 'Name',
+    contact_form_email: 'Email',
+    contact_form_message: 'Message',
+    contact_submit: 'Send Message',
+    contact_success_title: 'Message Sent',
+    contact_success_description: 'Thank you for reaching out! We have received your message and will get back to you soon.',
+    contact_success_button: 'OK',
+    contact_error_required: 'This field is required',
+    contact_error_email: 'Please enter a valid email address',
     our_story: 'Our Story',
     our_philosophy: 'Our Philosophy',
     design: 'Design',
